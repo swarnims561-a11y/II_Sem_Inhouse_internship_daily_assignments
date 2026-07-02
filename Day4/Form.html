@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Sign-Up</title>
+  <style>
+    /* --- Base Variables & Styling --- */
+    :root {
+      --bg-color: #f8f9fa;
+      --container-bg: #ffffff;
+      --text-color: #2c3e50;
+      --border-color: #ddd;
+      --btn-bg: #0d47a1;
+      --btn-hover: #0a3d91;
+      --error-color: #e74c3c;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --container-bg: #1e1e1e;
+      --text-color: #e0e0e0;
+      --border-color: #444;
+      --btn-bg: #1a3a52;
+      --btn-hover: #142d42;
+      --error-color: #ff6b6b;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .widget-container {
+      background: var(--container-bg);
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s;
+    }
+
+    .form-container {
+      background: var(--container-bg);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+    }
+
+    h2 { margin-top: 0; margin-bottom: 20px; }
+
+    /* --- Buttons --- */
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      background-color: var(--btn-bg);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background-color: var(--btn-hover); }
+    .btn-secondary { background-color: #6c757d; }
+    .btn-secondary:hover { background-color: #5a6268; }
+    .submit-btn { width: 100%; margin-top: 15px; font-size: 16px; }
+
+    /* --- Form Elements --- */
+    .form-group { margin-bottom: 15px; }
+    
+    label { 
+      display: block; 
+      margin-bottom: 5px; 
+      font-weight: bold;
+      color: #666;
+    }
+    body.dark label { color: #bbb; }
+    
+    input[type="text"], input[type="password"], select {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-top: 5px;
+    }
+    
+    .radio-group input, .checkbox-group input { margin-right: 5px; }
+
+    /* --- Error Messages --- */
+    .error-msg {
+      color: var(--error-color);
+      font-size: 0.85em;
+      margin-top: 5px;
+      display: none; /* Hidden by default */
+    }
+    input.error-border, select.error-border { border-color: var(--error-color); }
+  </style>
+</head>
+<body>
+
+  <div class="widget-container">
+    <div>
+      <button id="theme-toggle">🌙 Dark</button>
+    </div>
+    <div>
+      <span style="font-weight: bold; margin-right: 10px;">Count: <span id="click-count">0</span></span>
+      <button id="click-btn">+</button>
+      <button id="reset-btn" class="btn-secondary">Clear</button>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <h2>Create Account</h2>
+    <form id="registration-form" novalidate>
+      
+      <div class="form-group">
+        <label for="fullName">Complete Name</label>
+        <input type="text" id="fullName" placeholder="Your name here">
+        <div id="nameError" class="error-msg">Full Name is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="text" id="email" placeholder="your.email@example.com">
+        <div id="emailError" class="error-msg">Email is required and must contain '@'</div>
+      </div>
+
+      <div class="form-group">
+        <label>Gender</label>
+        <div class="radio-group">
+          <label style="font-weight: normal;"><input type="radio" name="gender" value="Male" checked> Male</label>
+          <label style="font-weight: normal;"><input type="radio" name="gender" value="Female"> Female</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="course">Program</label>
+        <select id="course">
+          <option value="">Choose a program</option>
+          <option value="frontend">Front-End Dev</option>
+          <option value="backend">Back-End Dev</option>
+          <option value="fullstack">Full-Stack Dev</option>
+        </select>
+        <div id="courseError" class="error-msg">Please select a course</div>
+      </div>
+
+      <div class="form-group">
+        <label>Technical Skills</label>
+        <div class="checkbox-group">
+          <label style="font-weight: normal;"><input type="checkbox" name="skills" value="HTML"> HTML</label>
+          <label style="font-weight: normal;"><input type="checkbox" name="skills" value="CSS"> CSS</label>
+          <label style="font-weight: normal;"><input type="checkbox" name="skills" value="JavaScript"> JS</label>
+        </div>
+        <div id="skillsError" class="error-msg">Select at least one skill</div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Min. 6 characters">
+        <div id="pwdError" class="error-msg">Password is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Verify Password</label>
+        <input type="password" id="confirmPassword" placeholder="Re-enter password">
+        <div id="cpwdError" class="error-msg">Passwords do not match</div>
+      </div>
+
+      <button type="submit" class="submit-btn">Sign Up</button>
+    </form>
+  </div>
+
+  <script>
+    // --- Dark Mode Toggle ---
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+
+    // --- Click Counter ---
+    let count = 0;
+    const clickCountDisplay = document.getElementById('click-count');
+    document.getElementById('click-btn').addEventListener('click', () => {
+      count++;
+      clickCountDisplay.textContent = count;
+    });
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      count = 0;
+      clickCountDisplay.textContent = count;
+    });
+
+    // --- Form Validation ---
+    const form = document.getElementById('registration-form');
+
+    // Helper function to show/hide errors
+    function toggleError(condition, inputElementId, errorElementId) {
+      const inputEl = document.getElementById(inputElementId);
+      const errorEl = document.getElementById(errorElementId);
+      
+      if (condition) {
+        errorEl.style.display = 'block';
+        if(inputEl) inputEl.classList.add('error-border');
+        return false;
+      } else {
+        errorEl.style.display = 'none';
+        if(inputEl) inputEl.classList.remove('error-border');
+        return true;
+      }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); // Stop page reload
+      let isValid = true;
+
+      // Validate Name
+      const nameVal = document.getElementById('fullName').value.trim();
+      if (!toggleError(nameVal === '', 'fullName', 'nameError')) isValid = false;
+
+      // Validate Email
+      const emailVal = document.getElementById('email').value.trim();
+      if (!toggleError(emailVal === '' || !emailVal.includes('@'), 'email', 'emailError')) isValid = false;
+
+      // Validate Course
+      const courseVal = document.getElementById('course').value;
+      if (!toggleError(courseVal === '', 'course', 'courseError')) isValid = false;
+
+      // Validate Skills (Checkboxes)
+      const checkedSkills = document.querySelectorAll('input[name="skills"]:checked');
+      if (!toggleError(checkedSkills.length === 0, null, 'skillsError')) isValid = false;
+
+      // Validate Password
+      const pwdVal = document.getElementById('password').value;
+      if (!toggleError(pwdVal === '', 'password', 'pwdError')) isValid = false;
+
+      // Validate Confirm Password
+      const cpwdVal = document.getElementById('confirmPassword').value;
+      if (!toggleError(cpwdVal === '' || cpwdVal !== pwdVal, 'confirmPassword', 'cpwdError')) isValid = false;
+
+      // Submit Success
+      if (isValid) {
+        alert('Account created successfully!');
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
