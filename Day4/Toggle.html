@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body.dark {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body.light {
+            background-color: #fff;
+            color: #000;
+        }
+
+        #darkToggle {
+            padding: 5px 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body class="light">
+    <button id="darkToggle">Dark Mode</button>
+    
+    <h1>hello world</h1>
+    <button id ="mybtn">submit </button>
+    <h3 id="display"></h3>
+    <input id="nameinput" placeholder="Enter your name">
+    <h3 id="greeting"></h3>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Dark Mode Toggle
+        $('#darkToggle').click(function() {
+            $('body').toggleClass('dark light');
+            $(this).text($(this).text() === 'Dark Mode' ? 'Light Mode' : 'Dark Mode');
+        });
+
+        // Original JavaScript Code
+        let playername="suar";
+        console.log(`hello ${playername}`);
+        let score=0;
+        score++;
+        console.log(score);
+        isloggedin=true;
+        console.log(`${playername} has score : ${score}`);
+        // your profile
+        const firstname="suar";
+        const lastname="khan";
+        const studentid=123456;
+        const year=2026;
+        const cgpa = 7;
+
+        console.log(`--student profile--`);
+        console.log(`name : ${firstname} ${lastname}`);
+        console.log(`studentid : ${studentid}`);
+        console.log(`year : ${year}`);
+        console.log(`cgpa: ${cgpa}`);
+
+function greetstudent(argument){
+    console.log(`hello ${argument}`);
+}
+greetstudent("suar");
+function gstudent(arg){
+    return `hello ${arg}`;
+
+}
+console.log(gstudent("suar"));
+const heading =document.querySelector("h1");
+console.log(heading.textconstent);
+heading.textcontent="js is live!";
+heading.style.color="#16FFBB";
+//button click event
+const btn = document.querySelector("#mybtn");
+btn.addEventListener("click",function(){
+    let count= parseInt(btn.dataset.count || 0);
+    count++;
+    btn.dataset.count=count;
+    document.querySelector("#display").textContent=` click ${count} `;
+});
+//input event
+document.querySelector("#nameinput ").addEventListener("input", (e) => {
+    document.querySelector("#greeting").textContent= `hi ${e.target.value} !`;
+
+});
+
+    </script>
+</body>
+</html>
