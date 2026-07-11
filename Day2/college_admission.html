@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>College Admission Form</title>
+
+<style>
+
+body{
+    background-color:beige;
+
+}
+
+.container{
+    width:400px;
+    margin:40px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid gray;
+}
+
+h2{
+    text-align:center;
+    color:darkblue;
+}
+
+label{
+    display:block;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:8px;
+    margin-top:5px;
+    border:1px solid gray;
+    border-radius:5px;
+    box-sizing:border-box;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>College Admission Form</h2>
+
+<form>
+
+<label>Full Name</label>
+<input type="text" placeholder="Enter your full name" required>
+
+<label>Email</label>
+<input type="email" placeholder="Enter your email" required>
+
+<label>Phone Number</label>
+<input type="tel" placeholder="Enter your phone number" required>
+
+<label>Date of Birth</label>
+<input type="date" required>
+
+<label>Gender</label>
+<input type="radio" name="gender" value="male"> Male
+<input type="radio" name="gender" value="female"> Female
+<input type="radio" name="gender" value="other"> Other
+
+<br><br>
+
+<label>Course</label>
+
+<select required>
+    <option>Select Course</option>
+    <option>B.Tech CSE</option>
+    <option>B.Tech AI</option>
+    <option>BCA</option>
+    <option>BBA</option>
+</select>
+
+<label>Address</label>
+<textarea rows="4" placeholder="Enter your address"></textarea>
+
+<label>Password</label>
+<input type="password" placeholder="Create password" required>
+
+<input type="submit" value="Submit" class="btn">
+
+</form>
+
+</div>
+
+</body>
+</html>
